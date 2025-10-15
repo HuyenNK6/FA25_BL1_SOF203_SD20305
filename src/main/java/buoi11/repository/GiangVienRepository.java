@@ -38,6 +38,33 @@ public class GiangVienRepository {
         }
         return listGVs;
     }
+    public GiangVien findById(int id){
+       GiangVien gv= new GiangVien();
+        String sql = "SELECT TOP (1000) [id]\n" +
+                "      ,[ma]\n" +
+                "      ,[ten]\n" +
+                "      ,[tuoi]\n" +
+                "      ,[gioi_tinh]\n" +
+                "      ,[que_quan]\n" +
+                "  FROM [DB_GiangVien].[dbo].[giang_vien]" +
+                " WHERE id = ?";
+        try (Connection con = DBConnect.getConnection();
+             PreparedStatement ps= con.prepareStatement(sql)){
+            ps.setObject(1,id);
+            ResultSet rs= ps.executeQuery();
+            while (rs.next()){
+                gv.setId(rs.getInt(1));
+                gv.setMa(rs.getString(2));
+                gv.setTen(rs.getString(3));
+                gv.setTuoi(rs.getInt(4));
+                gv.setGioiTinh(rs.getBoolean(5));
+                gv.setQueQuan(rs.getString(6));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return gv;
+    }
 
     public static void main(String[] args) {
         GiangVienRepository repo= new GiangVienRepository();
