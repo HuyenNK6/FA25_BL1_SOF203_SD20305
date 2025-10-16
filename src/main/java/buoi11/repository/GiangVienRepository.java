@@ -65,6 +65,29 @@ public class GiangVienRepository {
         }
         return gv;
     }
+    public int add(GiangVien gv){
+        int result= 0;
+        String sql = "INSERT INTO [dbo].[giang_vien]\n" +
+                "           ([ma]\n" +
+                "           ,[ten]\n" +
+                "           ,[tuoi]\n" +
+                "           ,[gioi_tinh]\n" +
+                "           ,[que_quan])\n" +
+                "     VALUES\n" +
+                "           (?,?,?,?,?)";
+        try (Connection con = DBConnect.getConnection();
+             PreparedStatement ps= con.prepareStatement(sql)){
+            ps.setObject(1, gv.getMa());
+            ps.setObject(2, gv.getTen());
+            ps.setObject(3, gv.getTuoi());
+            ps.setObject(4, gv.getGioiTinh());
+            ps.setObject(5, gv.getQueQuan());
+            result = ps.executeUpdate();//INSERT, UPDATE, DELETE
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         GiangVienRepository repo= new GiangVienRepository();

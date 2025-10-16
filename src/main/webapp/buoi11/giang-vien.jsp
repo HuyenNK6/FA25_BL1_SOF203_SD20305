@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form>
+    <form action="/giang-vien/hien-thi-tat-ca" method="post">
         <label>Mã</label>
         <input type="text" name="ma" value="${gv.ma}" required> <br>
         <label>Tên</label>
@@ -25,8 +25,9 @@
         <input type="radio" name="gioiTinh" id="female" value="nu" ${!gv.gioiTinh ? "checked" : ""}>
         <label for="female">Nữ</label><br>
         <label>Quê quán</label>
-        <input type="text" name="ma"  value="${gv.queQuan}" required> <br>
-        <button type="submit"> ADD</button>
+        <input type="text" name="queQuan"  value="${gv.queQuan}" required> <br>
+        <button type="submit" name="hanhDong" value="add"> ADD</button>
+        <button type="submit" name="hanhDong" value="update"> UPDATE</button>
     </form>
 
     <table>
